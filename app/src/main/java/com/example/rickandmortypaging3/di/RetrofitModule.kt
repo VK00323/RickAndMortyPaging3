@@ -1,5 +1,6 @@
 package com.example.rickandmortypaging3.di
 
+import android.app.Application
 import com.example.rickandmortypaging3.network.ApiService
 import dagger.Module
 import dagger.Provides
@@ -22,6 +23,11 @@ object RetrofitModule {
     @Singleton
     @Provides
     fun apiService(): ApiService = retrofit().create(ApiService::class.java)
+
+    @Provides
+    fun application(): Application {
+        return application()
+    }
 
 
 }
