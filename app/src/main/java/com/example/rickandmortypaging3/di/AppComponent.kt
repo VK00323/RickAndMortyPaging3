@@ -7,6 +7,4 @@ import dagger.Component
 interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
-
-
 }

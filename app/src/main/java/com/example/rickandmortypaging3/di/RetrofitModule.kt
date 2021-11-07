@@ -28,6 +28,4 @@ object RetrofitModule {
     fun application(): Application {
         return application()
     }
-
-
 }

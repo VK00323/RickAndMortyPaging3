@@ -33,7 +33,6 @@ class CharacterAdapter :
         }
     }
 
-
     inner class CharacterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textViewName: TextView = itemView.findViewById(R.id.textViewName)
         val textViewStatus: TextView = itemView.findViewById(R.id.textViewStatus)

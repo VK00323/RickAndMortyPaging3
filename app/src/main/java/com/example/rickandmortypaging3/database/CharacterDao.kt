@@ -13,5 +13,5 @@ interface CharacterDao {
     fun getAllCharacter(): LiveData<List<PojoResult>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllCharacter(list : List<PojoResult>)
+    fun insertAllCharacter(list: List<PojoResult>)
 }

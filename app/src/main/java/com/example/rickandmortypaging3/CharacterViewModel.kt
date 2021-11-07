@@ -18,7 +18,6 @@ class CharacterViewModel  (application: Application) : AndroidViewModel(
     application
 ) {
 //    @Inject constructor (application: Application, private val apiService: ApiService)
-
     private val apiService: ApiService = RetrofitModule.retrofit().create(ApiService::class.java)
     //    загрузчик, вернет Пэйджинг дату обернутую в корутин флоу
     fun getAllCharacter(): Flow<PagingData<PojoResult>> {
