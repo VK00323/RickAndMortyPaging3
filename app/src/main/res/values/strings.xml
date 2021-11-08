@@ -8,4 +8,5 @@
     <string name="species">Species</string>
     <string name="again">Again</string>
     <string name="not_internet_connection">Отсутствует интернет</string>
+    <string name="check_internet_connect">Проверьте подключение к интернету</string>
 </resources>

@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var adapter: CharacterAdapter
+    private lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as App).appComponent.inject(this)
@@ -30,15 +31,26 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         recyclerView = findViewById(R.id.RecyclerViewItem)
         progressBar = findViewById(R.id.progressBar)
-        val button = findViewById<Button>(R.id.buttonInternet)
-        viewModel = ViewModelProvider(this)[CharacterViewModel::class.java]
+        button = findViewById(R.id.buttonInternet)
         adapter = CharacterAdapter()
+        viewModel = ViewModelProvider(this)[CharacterViewModel::class.java]
+        loadData()
+        initAdapter()
+        buttonRetryInternet()
+    }
+
+    private fun loadData() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.getAllCharacter().collectLatest {
+                adapter.submitData(it)
+            }
+        }
+    }
+
+    private fun initAdapter(){
         recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = CharacterLoaderStateAdapter(),
-            footer = CharacterLoaderStateAdapter()
-        )
-        loadData()
-
+            footer = CharacterLoaderStateAdapter())
         (adapter).addLoadStateListener { state: CombinedLoadStates ->
             val refreshState = state.refresh
             recyclerView.isVisible = state.refresh != LoadState.Loading
@@ -47,29 +59,18 @@ class MainActivity : AppCompatActivity() {
                 button.visibility = View.VISIBLE
                 Snackbar.make(
                     recyclerView.rootView,
-                    refreshState.error.localizedMessage ?: "Unknown Error",
+                    getString(R.string.check_internet_connect),
                     Snackbar.LENGTH_SHORT
                 ).show()
             } else {
                 button.visibility = View.INVISIBLE
             }
         }
+    }
 
+    private fun buttonRetryInternet(){
         button.setOnClickListener {
             loadData()
         }
-
     }
-
-    private fun loadData() {
-        lifecycleScope.launchWhenCreated {
-            viewModel.getAllCharacter().collectLatest {
-                adapter.submitData(it)
-
-
-            }
-        }
-    }
-
-
 }

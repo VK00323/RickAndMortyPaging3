@@ -49,6 +49,4 @@ class CharacterPagingSource @Inject constructor(private val apiService: ApiServi
     companion object {
         private const val FIRST_PAGE_INDEX = 1
     }
-
-
 }

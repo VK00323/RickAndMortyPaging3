@@ -10,5 +10,4 @@ interface ApiService {
    suspend fun apiGetCharacterFromPage(
         @Query("page") page: Int
     ) : PojoExample
-
 }
