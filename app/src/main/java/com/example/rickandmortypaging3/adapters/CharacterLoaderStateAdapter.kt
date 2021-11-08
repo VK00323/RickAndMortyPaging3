@@ -12,7 +12,7 @@ import com.example.rickandmortypaging3.databinding.ItemProgressBinding
 class CharacterLoaderStateAdapter : LoadStateAdapter<CharacterLoaderStateAdapter.ItemViewHolder>() {
 
     override fun getStateViewType(loadState: LoadState) = when (loadState) {
-        is LoadState.NotLoading -> error("Not supported")
+        is LoadState.NotLoading -> NOT_LOADING
         LoadState.Loading -> PROGRESS
         is LoadState.Error -> ERROR
     }
@@ -30,7 +30,7 @@ class CharacterLoaderStateAdapter : LoadStateAdapter<CharacterLoaderStateAdapter
     }
 
     private companion object {
-
+        private const val NOT_LOADING = 2
         private const val ERROR = 1
         private const val PROGRESS = 0
     }
